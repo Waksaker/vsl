@@ -1,6 +1,6 @@
 1) cara untuk betulkan folder laravel selepas clone dari github
 	1. Buka power shell atau terminal.
-	2. type terminal pergi ke part folder projek masjid "C:\laragon\www\masjid" -> run "composer install".
+	2. type terminal pergi ke part folder projek masjid "C:\laragon\www\vsl" -> run "composer install".
 	3. pergi ke folder projek masjid "C:\laragon\www\masjid" -> copy file ".env.example" dan paste di dalam folder projek -> 
 		rename file ".env.example" kepada ".env".
 	4. run "php artisan key:generate"
