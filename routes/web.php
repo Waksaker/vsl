@@ -21,6 +21,13 @@ Route::get('/', function () {
 
 //signin
 Route::get('/login', [LoginController::class, 'loginshow'])->name('loginshow');
+Route::post('/loginaction', [LoginController::class, 'login'])->name('loginaction');
 
 //signup
 Route::get('/signup', [SignupController::class, 'signupshow'])->name('signupshow');
+Route::post('/signup', [SignupController::class, 'signup'])->name('signup');
+
+//dashboard
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');

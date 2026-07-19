@@ -41,7 +41,7 @@
                   <br>
                   <h3><b>Sign In</b></h3>
                 </a>
-                <form name="login" action="" method="post">
+                <form name="login" action="{{ route('loginaction') }}" method="post">
                   @csrf
                   <div class="mb-3">
                     <label for="email" class="form-label">E-mail</label>
@@ -51,7 +51,7 @@
                     <label for="katalaluan" class="form-label">Password</label>
                     <input type="password" class="form-control" id="katalaluan" name="katalaluan">
                   </div>
-                  <button type="button" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" onClick="validate()">Sign In</button>
+                  <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In</button>
                   <a href="{{ route('signupshow') }}" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign Up</a>
                   <a href="" class="w-100 py-8 fs-4 mb-4 rounded-2 text-center d-block">Click here if you forgot your password.</a>
                 </form>
@@ -65,54 +65,19 @@
   <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }}"></script>
   <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('assets/js/sweetalert2.min.js') }}"></script>
-  <script>
-    function validate()
-    {
-      form = document.login;
-      if	(form.email.value == null || form.email.value=="")
-      {
-        Swal.fire({
-          icon: 'warning',
-          text: 'Please fill in your correct e-mail!',
-          confirmButtonColor: '#1B95CF'
-        })
-        form.email.focus();
-        return;
-      }
-      else if (form.katalaluan.value == null || form.katalaluan.value=="")
-      {
-        Swal.fire({
-          icon: 'warning',
-          text: 'Please fill in your correct password!',
-          confirmButtonColor: '#1B95CF'
-        })
-        form.katalaluan.focus();
-        return;
-      }
-      form.submit();
-    }
-  </script>
  @if(session('success'))
 <script>
   Swal.fire({
     icon: 'success',
-    text: 'Registration successful!',
+    text: '{{ session('success') }}',
     confirmButtonColor: '#1B95CF'
   });
 </script>
-@elseif(session('success_update'))
-<script>
-  Swal.fire({
-    icon: 'success',
-    text: 'Success! A new password has been sent to your email address.',
-    confirmButtonColor: '#1B95CF'
-  });
-</script>
-@elseif(session('fail'))
+@elseif(session('error'))
 <script>
   Swal.fire({
     icon: 'warning',
-    text: 'Invalid username or password. Please try again.',
+    text: '{{ session('error') }}',
     confirmButtonColor: '#1B95CF'
   });
 </script>
