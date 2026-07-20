@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
+use App\Http\Controllers\ForgotController;
+use App\Http\Controllers\DashController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +30,14 @@ Route::post('/loginaction', [LoginController::class, 'login'])->name('loginactio
 Route::get('/signup', [SignupController::class, 'signupshow'])->name('signupshow');
 Route::post('/signup', [SignupController::class, 'signup'])->name('signup');
 
+//forgot password
+Route::get('/forgot', function () {
+return view('forgot');
+})->name('forgot');
+Route::post('/forgotaction', [ForgotController::class, 'forgot'])->name('forgotaction');
+
 //dashboard
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/dashboard', [DashController::class, 'dashboard'])->name('dashboard');
+
+//profile
+Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');

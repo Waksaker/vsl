@@ -39,25 +39,21 @@
                   <img src="{{ asset('assets/images/logo.jpg') }}" width="180" alt="">
                   <br>
                   <br>
-                  <h3><b>Sign In</b></h3>
+                  <h3><b>Forgot Password</b></h3>
                 </a>
-                <form name="login" action="{{ route('loginaction') }}" method="post">
+                <form name="login" action="{{ route('forgotaction') }}" method="post">
                   @csrf
                   <div class="mb-3">
                     <label for="email" class="form-label">E-mail</label>
                     <input type="email" class="form-control" id="email" name="email">
                   </div>
-                  <div class="mb-4">
-                    <label for="katalaluan" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="katalaluan" name="katalaluan">
-                  </div>
-                  <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In</button>
-                </form>
-                <select id="page" name="user_type" class="w-100 py-8 fs-4 mb-4 rounded-2 text-center d-block" required>
+                  <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Reset Password</button>
+                  <a href="{{ route('loginshow') }}" class="btn btn-secondary w-100 py-8 fs-4 mb-4 rounded-2">Back to Sign In</a>
+                  {{-- <select id="page" name="user_type" class="w-100 py-8 fs-4 mb-4 rounded-2 text-center d-block" required>
                     <option value="">-- Select --</option>
-                    <option value="{{ route('signupshow') }}">Sign Up</option>
-                    <option value="{{ route('forgot') }}">Forgot Password</option>
-                </select>
+                    <option value="{{ route('loginshow') }}">Sign In</option>
+                  </select> --}}
+                </form>
               </div>
             </div>
           </div>
@@ -75,7 +71,7 @@ document.getElementById('page').addEventListener('change', function () {
     }
 });
 </script>
-  @if(session('success'))
+ @if(session('success'))
 <script>
   Swal.fire({
     icon: 'success',

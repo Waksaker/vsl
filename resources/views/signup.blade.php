@@ -52,8 +52,8 @@
                     <sup><font style="color:red">*Please enter your address</font></sup>
                   </div>
                   <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Submit</button>
-                  <a href="{{ route('loginshow') }}" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In</a>
                 </form>
+                <a href="{{ route('loginshow') }}" class="btn btn-secondary w-100 py-8 fs-4 mb-4 rounded-2">Back to Sign In</a>
               </div>
             </div>
           </div>
@@ -61,8 +61,15 @@
       </div>
     </div>
   </div>
-  <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }}"></script>
-  <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ asset('assets/js/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/js/sweetalert2.min.js') }}"></script>
+<script>
+document.getElementById('page').addEventListener('change', function () {
+    if (this.value) {
+        window.location.href = this.value;
+    }
+});
+</script>
 </body>
 </html>

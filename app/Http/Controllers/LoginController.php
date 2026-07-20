@@ -15,23 +15,31 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|string|email|max:255',
-            'katalaluan' => 'required|string|max:255',
+            'email' => 'required|email',
+            'katalaluan' => 'required|string',
         ]);
 
-        $email = $request->input('email');
-        $password = $request->input('katalaluan');
+        $user = DB::table('beuty_user')
+                    ->where('email', $request->email)
+                    ->first();
 
-        $user = \DB::table('beuty_user')->where('email', $email)->first();
+        if ($user && Hash::check($request->katalaluan, $user->pass)) {
 
-        $pass = \Hash::check($password, $user->pass);
+            // simpan user dalam session
+            session([
+                'user_id' => $user->user_id,
+                'user_name' => $user->name,
+                'user_email' => $user->email
+            ]);
 
-        if ($user != null && $pass == true) {
-            // Authentication successful
-            return redirect()->route('dashboard')->with('success', 'Login successful.');
+            return redirect()
+                    ->route('dashboard')
+                    ->with('success', 'Login successful.');
+
         } else {
-            // Authentication failed
-            return redirect()->back()->with('error', 'Invalid email or password.');
+
+            return back()
+                    ->with('error', 'Invalid email or password.');
         }
     }
 }

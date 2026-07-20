@@ -10,6 +10,9 @@
 <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
 </head>
 <body>
+@php
+    $users=DB::table('beuty_user')->where('user_id', $iduser)->first();
+@endphp
 <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
 data-sidebar-position="fixed" data-header-position="fixed">
     <aside class="left-sidebar">
@@ -94,53 +97,41 @@ data-sidebar-position="fixed" data-header-position="fixed">
         <div class="container-fluid">
             <div class="card">
                 <div class="card-body">
-                <h5 class="card-title fw-semibold mb-4">Hi, {{ $user->name }}</h5>
+                <h5 class="card-title fw-semibold mb-4">Hi, {{ $users->name }}</h5>
                 </div>
             </div>
             <div class="card">
                 <div class="card-body">
-                    {{-- <h5 class="card-title fw-semibold mb-4">Dashboard</h5> --}}
-                    <div class="row text-center">
-                        <div class="col-md-3 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <img src="{{ asset('assets/images/logo.jpg') }}" alt="" class="custom-logo img-fluid" width="100">
-                                    <h6>Soap</h6>
-                                    <h3>RM 45.00</h3>
-                                </div>
-                            </div>
+                    <h5 class="card-title fw-semibold mb-4">Profile</h5>
+                    <form action="" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ $users->name }}">
+                            <sup><font style="color:red">*Please enter your full name</font></sup>
                         </div>
-
-                        <div class="col-md-3 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <img src="{{ asset('assets/images/logo.jpg') }}" alt="" class="custom-logo img-fluid" width="100">
-                                    <h6>Tarikh Semasa</h6>
-                                    <h3>RM 60.00</h3>
-                                </div>
-                            </div>
+                        <div class="mb-3">
+                            <label for="pass" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="pass" name="pass" value="">
+                            <sup><font style="color:red">*Please enter your password</font></sup>
                         </div>
-
-                        <div class="col-md-3 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <img src="{{ asset('assets/images/logo.jpg') }}" alt="" class="custom-logo img-fluid" width="100">
-                                    <h6>Tarikh Semasa</h6>
-                                    <h3>RM 60.00</h3>
-                                </div>
-                            </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ $users->email }}">
+                            <sup><font style="color:red">*Please enter your email</font></sup>
                         </div>
-
-                        <div class="col-md-3 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <img src="{{ asset('assets/images/logo.jpg') }}" alt="" class="custom-logo img-fluid" width="100">
-                                    <h6>Tarikh Semasa</h6>
-                                    <h3>RM 60.00</h3>
-                                </div>
-                            </div>
+                        <div class="mb-3">
+                            <label for="telphone" class="form-label">Telephone Number (no -)</label>
+                            <input type="text" class="form-control" id="telphone" name="telphone" value="{{ $users->no_tel }}" placeholder="example: 0123456789">
+                            <sup><font style="color:red">*Please enter your telephone number</font></sup>
                         </div>
-                    </div>
+                        <div class="mb-3">
+                            <label for="location" class="form-label">Location</label>
+                            <textarea id="location" name="location" class="form-control" rows="4" placeholder="">{{ $users->location }}</textarea>
+                            <sup><font style="color:red">*Please enter your address</font></sup>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </form>
                 </div>
             </div>
         </div>
