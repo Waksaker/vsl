@@ -103,7 +103,7 @@ data-sidebar-position="fixed" data-header-position="fixed">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title fw-semibold mb-4">Profile</h5>
-                    <form action="" method="POST">
+                    <form action="{{ route('profileaction') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Full Name</label>
@@ -112,7 +112,7 @@ data-sidebar-position="fixed" data-header-position="fixed">
                         </div>
                         <div class="mb-3">
                             <label for="pass" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="pass" name="pass" value="">
+                            <input type="text" class="form-control" id="pass" name="pass" value="{{ $users->pass }}">
                             <sup><font style="color:red">*Please enter your password</font></sup>
                         </div>
                         <div class="mb-3">

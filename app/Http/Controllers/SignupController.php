@@ -28,7 +28,7 @@ class SignupController extends Controller
             'email' => $request->email,
             'no_tel' => $request->telphone,
             'location' => $request->location,
-            'pass' => bcrypt($random),
+            'pass' => $random,
             'status' => 'no admin',
         ]);
 

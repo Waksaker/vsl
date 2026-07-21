@@ -23,7 +23,7 @@ class LoginController extends Controller
                     ->where('email', $request->email)
                     ->first();
 
-        if ($user && Hash::check($request->katalaluan, $user->pass)) {
+        if ($user && $request->katalaluan === $user->pass) {
 
             // simpan user dalam session
             session([
