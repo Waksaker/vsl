@@ -38,6 +38,8 @@ Route::post('/forgotaction', [ForgotController::class, 'forgot'])->name('forgota
 
 //dashboard
 Route::get('/dashboard', [DashController::class, 'dashboard'])->name('dashboard');
+//dashboard
+Route::get('/dashboardadmin', [DashController::class, 'dashadmin'])->name('dashboardadmin');
 
 //profile
 Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');

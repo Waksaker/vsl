@@ -24,18 +24,29 @@ class LoginController extends Controller
                     ->first();
 
         if ($user && $request->katalaluan === $user->pass) {
+            if($user->status==='no admin'){
+                 // simpan user dalam session
+                session([
+                    'user_id' => $user->user_id,
+                    'user_name' => $user->name,
+                    'user_email' => $user->email
+                ]);
 
-            // simpan user dalam session
-            session([
-                'user_id' => $user->user_id,
-                'user_name' => $user->name,
-                'user_email' => $user->email
-            ]);
-
-            return redirect()
+                return redirect()
                     ->route('dashboard')
-                    ->with('success', 'Login successful.');
+                    ->with('success', 'Login successful.');	    
+	    }elseif($user->status==='admin'){
+	        // simpan user dalam session
+                session([
+                    'user_id' => $user->user_id,
+                    'user_name' => $user->name,
+                    'user_email' => $user->email
+                ]);
 
+                return redirect()
+                    ->route('dashboardadmin')
+                    ->with('success', 'Login successful.');
+	    }
         } else {
 
             return back()
