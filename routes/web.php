@@ -41,4 +41,4 @@ Route::get('/dashboard', [DashController::class, 'dashboard'])->name('dashboard'
 
 //profile
 Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
-Route::post('/profileaction', [ProfileController:class, 'profileaction'])->name('profileaction');
+Route::post('/profileaction', [ProfileController::class, 'profileaction'])->name('profileaction');

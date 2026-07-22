@@ -140,11 +140,21 @@ data-sidebar-position="fixed" data-header-position="fixed">
 <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/js/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('assets/js/sidebarmenu.js') }}"></script>
+<script src="{{ asset('assets/js/app.min.js') }}"></script>
 @if(session('success'))
 <script>
   Swal.fire({
     icon: 'success',
     text: '{{ session('success') }}',
+    confirmButtonColor: '#1B95CF'
+  });
+</script>
+@elseif(session('error'))
+<script>
+  Swal.fire({
+    icon: 'warning',
+    text: '{{ session('error') }}',
     confirmButtonColor: '#1B95CF'
   });
 </script>
