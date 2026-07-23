@@ -10,6 +10,9 @@
 <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
 </head>
 <body>
+@php
+    $users=DB::table('beuty_user')->where('user_id', $iduser)->first();
+@endphp
 <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
 data-sidebar-position="fixed" data-header-position="fixed">
     <aside class="left-sidebar">
@@ -38,9 +41,9 @@ data-sidebar-position="fixed" data-header-position="fixed">
                     </span>
                     <span class="hide-menu">Dashboard</span>
                 </a>
-		</li>
+                </li>
 
-                <!-- <li class="nav-small-cap">
+                <li class="nav-small-cap">
                 <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                 <span class="hide-menu">ORDER</span>
                 </li>
@@ -51,7 +54,7 @@ data-sidebar-position="fixed" data-header-position="fixed">
                     </span>
                     <span class="hide-menu">Order</span>
                 </a>
-                </li> -->
+                </li>
             </ul>
         </nav>
       </div>
@@ -94,63 +97,51 @@ data-sidebar-position="fixed" data-header-position="fixed">
         <div class="container-fluid">
             <div class="card">
                 <div class="card-body">
-                <h5 class="card-title fw-semibold mb-4">Hi, {{ $user->name }}</h5>
+                <h5 class="card-title fw-semibold mb-4">Hi, {{ $users->name }}</h5>
                 </div>
             </div>
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title fw-semibold mb-4">List Produck</h5>
-                    <a href="" class="btn btn-primary">Add Produck</a>
-		    <br>
-		    <br>
-		    <table id="tableitem" class="table table-bordered">
-		        <thead>
-			    <tr>
-			        <th style="border: 1px solid black; text-align:center;">No</th>
-			        <th style="border: 1px solid black; text-align:center;">Name</th>
-			        <th style="border: 1px solid black; text-align:center;"> Status </th>
-			        <th style="border: 1px solid black; text-align:center;">Price</th>
-			        <th style="border: 1px solid black; text-align:center;">Action</th>
-			    </tr>
-			</thead>
-			<tbody>
-			    @foreach($item as $items)
-		                <tr>
-			            <td style="border: 1px solid black; text-align:center;">{{ $index++ }}</td>
-				    <td style="border: 1px solid black; text-align:center;">{{ $items->name }}</td>
-				    <td style="border: 1px solid black; text-align:center;">
-				        @if($items->status=='sell')
-					    <span class="badge bg-success">SELL</span>
-					@elseif($items->status=='not sell')
-					    <span class="badge bg-secondary">NOT SELL</span>
-					@endif
-				    </td>
-				    <td style="border: 1px solid black; text-align:center;">{{ $items->price }}</td>
-				    <td style="border: 1px solid black; text-align:center;">
-			                <a href="" class="btn btn-primary"><img src="{{ asset('assets/images/Pencil.png') }}" alt="" style="width: 24px; height: 24;"></a>
-				        <a href="" class="btn btn-danger"><img src="{{ asset('assets/images/Trash_Can.png') }}" alt="" style="width: 24px; height: 24;"></a>
-				    </td>
-			        </tr>
-			    @endforeach
-			</tbody>
-		    </table>
+                    <h5 class="card-title fw-semibold mb-4">Profile</h5>
+                    <form action="{{ route('profileaction') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ $users->name }}">
+                            <sup><font style="color:red">*Please enter your full name</font></sup>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pass" class="form-label">Password</label>
+                            <input type="text" class="form-control" id="pass" name="pass" value="{{ $users->pass }}">
+                            <sup><font style="color:red">*Please enter your password</font></sup>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ $users->email }}">
+                            <sup><font style="color:red">*Please enter your email</font></sup>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telphone" class="form-label">Telephone Number (no -)</label>
+                            <input type="text" class="form-control" id="telphone" name="telphone" value="{{ $users->no_tel }}" placeholder="example: 0123456789">
+                            <sup><font style="color:red">*Please enter your telephone number</font></sup>
+                        </div>
+                        <div class="mb-3">
+                            <label for="location" class="form-label">Location</label>
+                            <textarea id="location" name="location" class="form-control" rows="4" placeholder="">{{ $users->location }}</textarea>
+                            <sup><font style="color:red">*Please enter your address</font></sup>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </form>
                 </div>
             </div>
-	    <div class="card">
-                <div class="card-body">
-		    <h5 class="card-title fw-semibold mb-4">List Order</h5>
-		    
-		</div>
-	    </div>
         </div>
     </div>
 </div>
 <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/js/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('assets/js/sidebarmenu.js') }}"></script>
 <script src="{{ asset('assets/js/app.min.js') }}"></script>
-<script src="{{ asset('assets/datatables/datatables.js') }}"></script>
-<link rel="stylesheet" href="assets/datatables/datatables.css" />
 @if(session('success'))
 <script>
   Swal.fire({
@@ -159,11 +150,14 @@ data-sidebar-position="fixed" data-header-position="fixed">
     confirmButtonColor: '#1B95CF'
   });
 </script>
-@endif
+@elseif(session('error'))
 <script>
-    let table = new DataTable('#tableitem', {
-
-    });
+  Swal.fire({
+    icon: 'warning',
+    text: '{{ session('error') }}',
+    confirmButtonColor: '#1B95CF'
+  });
 </script>
+@endif
 </body>
 </html>

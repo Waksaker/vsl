@@ -13,6 +13,10 @@ $iduser = session('user_id');
 // You can use the $id parameter to fetch the user's profile data
 return view('profile', compact('iduser'));
 }
+public function profileadmin(){
+$iduser=session('user_id');
+return view('profileadmin', compact('iduser'));
+}
 public function profileaction(Request $request)
 {
 $id=session('user_id');	
@@ -22,9 +26,17 @@ $email=$request->input('email');
 $telphone=$request->input('telphone');
 $location=$request->input('location');
 $update=DB::table('beuty_user')->where('user_id', $id)->update(['name'=>$name,'pass'=>$pass,'email'=>$email,'no_tel'=>$telphone,'location'=>$location]);
+$check=DB::table('beuty_user')->where('user_id', $id)->select('status')->first();
 if($update)
 {
+if($check->status==='no admin')
+{
 return redirect()->route('profile')->with('success', 'Update Profile Success.');
+}
+elseif($check->status==='admin')
+{
+return redirect()->route('profileadmin')->with('success', 'Update Profile Success');
+}
 }
 else
 {

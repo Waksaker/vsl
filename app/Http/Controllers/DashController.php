@@ -10,11 +10,15 @@ class DashController extends Controller
     public function dashboard()
     {
         $id = session('user_id');
-
-        $user = DB::table('beuty_user')
-                    ->where('user_id', $id)
-                    ->first();
-
+        $user = DB::table('beuty_user')->where('user_id', $id)->first();
         return view('dashboard', compact('user'));
+    }
+    public function dashadmin()
+    { 
+        $id = session('user_id');
+	$user = DB::table('beuty_user')->where('user_id', $id)->first();
+	$item=DB::table('vw_item')->get();
+	$index=1;
+        return view('dashboardadmin', compact('user', 'item', 'index'));
     }
 }
