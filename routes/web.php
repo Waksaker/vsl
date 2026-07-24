@@ -6,6 +6,7 @@ use App\Http\Controllers\SignupController;
 use App\Http\Controllers\ForgotController;
 use App\Http\Controllers\DashController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EditProdukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,3 +47,6 @@ Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
 //Profile admin
 Route::get('/profileadmin', [ProfileController::class, 'profileadmin'])->name('profileadmin');
 Route::post('/profileaction', [ProfileController::class, 'profileaction'])->name('profileaction');
+
+//edit produk
+//Route::get('/editproduks/{id}', )
