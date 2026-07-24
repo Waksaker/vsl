@@ -127,7 +127,7 @@ data-sidebar-position="fixed" data-header-position="fixed">
 				    </td>
 				    <td style="border: 1px solid black; text-align:center;">{{ $items->price }}</td>
 				    <td style="border: 1px solid black; text-align:center;">
-			                <a href="" class="btn btn-primary"><img src="{{ asset('assets/images/Pencil.png') }}" alt="" style="width: 24px; height: 24;"></a>
+			                <a href="{{ route('showeditproduk', $items->id); }}" class="btn btn-primary"><img src="{{ asset('assets/images/Pencil.png') }}" alt="" style="width: 24px; height: 24;"></a>
 				        <a href="" class="btn btn-danger"><img src="{{ asset('assets/images/Trash_Can.png') }}" alt="" style="width: 24px; height: 24;"></a>
 				    </td>
 			        </tr>

@@ -49,4 +49,4 @@ Route::get('/profileadmin', [ProfileController::class, 'profileadmin'])->name('p
 Route::post('/profileaction', [ProfileController::class, 'profileaction'])->name('profileaction');
 
 //edit produk
-//Route::get('/editproduks/{id}', )
+Route::get('/editproduks/{id}', [EditProdukController::class, 'showeditproduk'])->name('showeditproduk');
